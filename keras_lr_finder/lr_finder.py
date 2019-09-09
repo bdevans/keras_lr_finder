@@ -119,8 +119,10 @@ class LRFinder():
             n_skip_beginning - number of batches to skip on the left.
             n_skip_end - number of batches to skip on the right.
         """
-        plt.ylabel("loss")
-        plt.xlabel("learning rate (log scale)")
+        plt.ylabel(f"Loss ({self.model.loss})")
+#         plt.xlabel("learning rate (log scale)")
+        opt_params = self.model.optimizer.get_config()
+        plt.xlabel(f"Learning rate ({opt_params['name']})")
         plt.plot(self.lrs[n_skip_beginning:-n_skip_end], self.losses[n_skip_beginning:-n_skip_end])
         plt.xscale('log')
 
@@ -135,8 +137,9 @@ class LRFinder():
         """
         derivatives = self.get_derivatives(sma)[n_skip_beginning:-n_skip_end]
         lrs = self.lrs[n_skip_beginning:-n_skip_end]
-        plt.ylabel("rate of loss change")
-        plt.xlabel("learning rate (log scale)")
+        plt.ylabel("Rate of loss change")
+        opt_params = self.model.optimizer.get_config()
+        plt.xlabel(f"Learning rate ({opt_params['name']})")
         plt.plot(lrs, derivatives)
         plt.xscale('log')
         plt.ylim(y_lim)
