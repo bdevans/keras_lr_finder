@@ -70,6 +70,9 @@ class LRFinder():
         # Restore the original learning rate
         K.set_value(self.model.optimizer.lr, original_lr)
 
+        best_ind = np.argmin(self.losses)
+        print(f"\nBest learning rate: {self.lrs[best_ind]:.3}; (loss: {self.losses[best_ind]:.3})")
+
     def find_generator(self, generator, start_lr, end_lr, epochs=1, steps_per_epoch=None, **kw_fit):
             if steps_per_epoch is None:
                 try:
@@ -105,6 +108,9 @@ class LRFinder():
 
             # Restore the original learning rate
             K.set_value(self.model.optimizer.lr, original_lr)
+
+            best_ind = np.argmin(self.losses)
+            print(f"\nBest learning rate: {self.lrs[best_ind]:.3}; (loss: {self.losses[best_ind]:.3})")
 
     def plot_loss(self, n_skip_beginning=10, n_skip_end=5):
         """
