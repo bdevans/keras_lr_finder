@@ -1,11 +1,12 @@
 from matplotlib import pyplot as plt
 import math
-from keras.callbacks import LambdaCallback
-import keras.backend as K
+# from keras.callbacks import LambdaCallback
+from tensorflow.compat.v1.keras.callbacks import LambdaCallback
+import tensorflow.keras.backend as K
 import numpy as np
 
 
-class LRFinder:
+class LRFinder():
     """
     Plots the change of the loss function of a Keras model when the learning rate is exponentially increasing.
     See for details:
