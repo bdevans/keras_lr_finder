@@ -1,9 +1,11 @@
-from matplotlib import pyplot as plt
+import os
 import math
+
+from matplotlib import pyplot as plt
+import numpy as np
 # from keras.callbacks import LambdaCallback
 from tensorflow.compat.v1.keras.callbacks import LambdaCallback
 import tensorflow.keras.backend as K
-import numpy as np
 
 
 class LRFinder():
@@ -66,6 +68,7 @@ class LRFinder():
 
         # Restore the weights to the state before model fitting
         self.model.load_weights('tmp.h5')
+        os.remove('tmp.h5')
 
         # Restore the original learning rate
         K.set_value(self.model.optimizer.lr, original_lr)
